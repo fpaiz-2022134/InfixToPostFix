@@ -74,7 +74,7 @@ public class Main {
         }
 
         // Leer expresión desde archivo
-        Scanner file = new Scanner(new File("datos.txt"));
+        Scanner file = new Scanner(new File("datosPrograma.txt"));
         String expression = file.nextLine();
 
         System.out.println("\nExpresión Infix leída: " + expression);
