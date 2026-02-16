@@ -4,7 +4,7 @@ import ADT.Stack;
 
 public class InfixToPostfix {
 
-    public static String convert(String infix, Stack<Character> stack) {
+    public static String convert(String infix, Stack<Object> stack) {
 
         StringBuilder postfix = new StringBuilder();
         StringBuilder number = new StringBuilder();
@@ -26,7 +26,7 @@ public class InfixToPostfix {
                     stack.push(c);
                 }
                 else if (c == ')') {
-                    while (!stack.isEmpty() && stack.peek() != '(')
+                    while (!stack.isEmpty() && (Character) stack.peek() != '(')
                         postfix.append(stack.pop()).append(" ");
                     stack.pop();
                 }
@@ -34,8 +34,8 @@ public class InfixToPostfix {
                     continue;
                 }
                 else {
-                    while (!stack.isEmpty() && precedence(stack.peek()) >= precedence(c))
-                        postfix.append(stack.pop()).append(" ");
+                    while (!stack.isEmpty() &&
+                            precedence((Character) stack.peek()) >= precedence(c))                        postfix.append(stack.pop()).append(" ");
                     stack.push(c);
                 }
             }

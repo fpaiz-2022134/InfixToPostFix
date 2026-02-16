@@ -4,7 +4,7 @@ import ADT.Stack;
 
 public class PostfixEvaluator {
 
-    public static int evaluate(String postfix, Stack<Integer> stack) {
+    public static int evaluate(String postfix, Stack<Object> stack) {
 
         String[] tokens = postfix.split(" ");
 
@@ -13,8 +13,8 @@ public class PostfixEvaluator {
             if (token.matches("\\d+")) {
                 stack.push(Integer.parseInt(token));
             } else {
-                int b = stack.pop();
-                int a = stack.pop();
+                int b = (Integer) stack.pop();
+                int a = (Integer) stack.pop();
 
                 switch (token) {
                     case "+": stack.push(a + b); break;
@@ -25,6 +25,6 @@ public class PostfixEvaluator {
             }
         }
 
-        return stack.pop();
+        return (int) stack.pop();
     }
 }
