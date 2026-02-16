@@ -11,6 +11,7 @@ import utils.InfixToPostfix;
 import utils.PostfixEvaluator;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Main {
@@ -74,7 +75,8 @@ public class Main {
         }
 
         // Leer expresión desde archivo
-        Scanner file = new Scanner(new File("datosPrograma.txt"));
+        InputStream input1 = Main.class.getClassLoader().getResourceAsStream("datos.txt");
+        Scanner file = new Scanner(input1);
         String expression = file.nextLine();
 
         System.out.println("\nExpresión Infix leída: " + expression);
