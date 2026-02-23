@@ -1,16 +1,8 @@
-
-
-import ADT.ListADT;
 import ADT.Stack;
-import List.DoublyLinkedList;
-import List.SinglyLinkedList;
-import Stack.ArrayListStack;
-import Stack.ListStack;
-import Stack.VectorStack;
+import Factory.StackFactory;
 import utils.InfixToPostfix;
 import utils.PostfixEvaluator;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -29,50 +21,18 @@ public class Main {
         System.out.println("2. Vector");
         System.out.println("3. Lista (Implementación propia)");
 
-        int opcionStack = input.nextInt();
+        int stackOption = input.nextInt();
 
-        Stack<Object> stackChar;
-        Stack<Object> stackInt;
-
-        switch (opcionStack) {
-
-            case 1:
-                stackChar = new ArrayListStack<>();
-                stackInt = new ArrayListStack<>();
-                break;
-
-            case 2:
-                stackChar = new VectorStack<>();
-                stackInt = new VectorStack<>();
-                break;
-
-            case 3:
-                System.out.println("\nSeleccione la implementación de LISTA:");
-                System.out.println("1. Simplemente Encadenada");
-                System.out.println("2. Doblemente Encadenada");
-
-                int opcionLista = input.nextInt();
-
-                ListADT<Object> listChar;
-                ListADT<Object> listInt;
-
-                if (opcionLista == 1) {
-                    listChar = new SinglyLinkedList<>();
-                    listInt = new SinglyLinkedList<>();
-                } else {
-                    listChar = new DoublyLinkedList<>();
-                    listInt = new DoublyLinkedList<>();
-                }
-
-                stackChar = new ListStack<>(listChar);
-                stackInt = new ListStack<>(listInt);
-                break;
-
-            default:
-                System.out.println("Opción inválida. Se usará ArrayList por defecto.");
-                stackChar = new ArrayListStack<>();
-                stackInt = new ArrayListStack<>();
+        int listOption = 0;
+        if (stackOption == 3) {
+            System.out.println("\nSeleccione la implementación de LISTA:");
+            System.out.println("1. Simplemente Encadenada");
+            System.out.println("2. Doblemente Encadenada");
+            listOption = input.nextInt();
         }
+
+        Stack<Object> stackChar = StackFactory.createStack(stackOption, listOption);
+        Stack<Object> stackInt  = StackFactory.createStack(stackOption, listOption);
 
         // Leer expresión desde archivo
         InputStream input1 = Main.class.getClassLoader().getResourceAsStream("datos.txt");
